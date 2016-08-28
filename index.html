@@ -3,6 +3,13 @@
 <html class="no-js">
     <head>
         <title>Ludum Dare 36</title>
+
+        <meta property="og:url"                content="https://osthekake.github.io/LD36" />
+		<meta property="og:type"               content="game" />
+		<meta property="og:title"              content="Tech Tree - the game" />
+		<meta property="og:description"        content="Ludum Dare 36 contest entry. Online game made by Osthekake." />
+		<meta property="og:image"              content="https://osthekake.github.io/LD36/scr.png" />
+
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script type="text/javascript" src="lib/jquery-2.2.3.min.js"></script>
@@ -10,6 +17,15 @@
         <script type="text/javascript" src="lib/bootstrap.min.js"></script>
     </head>
     <body>
+	    <div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.7";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
     	<nav class="navbar navbar-inverse" id="infobar"></nav>
     	<div class="container" id="mainOutlet"></div>
     	<div id="modalOutlet" class="modal fade" role="dialog"></div>
@@ -25,9 +41,17 @@
 
 	    <script id="mainMenu" type="text/x-handlebars-template">
 	    	<div class="jumbotron">
-			  <h1>Tech Tree (the game)</h1>
-
-			  <p><a class="btn btn-primary btn-lg"onclick="Game.start();">Play</a></p>
+			  	<h1>Tech Tree (the game)</h1>
+		  		<p>
+		  			Tech Tree is a <a href="http://ludumdare.com/">Ludum Dare</a> contest entry by Osthekake. 
+		  			It was made in less than 48 hours, and the theme for this contest was <i>Ancient Technology</i>.
+		  			I hope you have some fun with it, despite it not being my strongest effort.
+	  			</p>
+	  			<p>
+	  				Leave a comment on the <a href="">Ludum Dare contest entry</a> or Like my game on Facebook!
+	  				<div class="fb-like" data-href="https://osthekake.github.io/LD36" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+  				</p>
+			  	<p><a class="btn btn-primary btn-lg"onclick="Game.start();">Play <strong>Tech Tree</strong> (the game)</a></p>
 			</div>
 	    </script>
 
@@ -269,11 +293,15 @@
 						</h1>
 					</div>
 					<div class="modal-body">
-						You researched Democracy in {{turnsTaken}} turns!
+						You researched Democracy in {{turnsTaken}} turns!<br/>
+
+						Did you do better than your friends?<br/>
+
+						<div class="fb-like" data-href="https://osthekake.github.io/LD36" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">
-							Close
+							Close and admire the tech tree.
 						</button>
 					</div>
 				</div>

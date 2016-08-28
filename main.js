@@ -684,7 +684,7 @@ Game.advanceTime = function(){
 	Game.renderUnborn();
 
 	if(Game.won){
-		console.log("yay!");
+		Game.showModal("#winModalTemplate");
 	}
 };
 
