@@ -653,7 +653,7 @@ Game.birth = function(){
 	Game.context.people.push(newBorn);
 	Game.context.unborn.push(newBorn);
 	Game.context.foodToPerson += Game.context.requiredFood;
-	Game.context.requiredFood += 25;
+	Game.context.requiredFood *= 1.7;
 	console.log("foodToPerson: " + Game.context.foodToPerson);
 }
 

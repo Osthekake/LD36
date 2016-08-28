@@ -33,9 +33,10 @@
 	    <!-- Templates go here -->
 
 	    <script id="infoBarTemplate" type="text/x-handlebars-template">
-	      <div class="container-fluid">
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Tech Tree (the game)</a>
+	      	<div class="container-fluid">
+			    <div class="navbar-header">
+		      		<a class="navbar-brand" href="#">Tech Tree (the game)</a>
+			    </div>
 		    </div>
     	</script>
 
@@ -43,7 +44,7 @@
 	    	<div class="jumbotron">
 			  	<h1>Tech Tree (the game)</h1>
 		  		<p>
-		  			Tech Tree is a <a href="http://ludumdare.com/">Ludum Dare</a> contest entry by Osthekake. 
+		  			Tech Tree is a <a href="http://ludumdare.com/compo/">Ludum Dare</a> contest entry by Osthekake. 
 		  			It was made in less than 48 hours, and the theme for this contest was <i>Ancient Technology</i>.
 		  			I hope you have some fun with it, despite it not being my strongest effort.
 	  			</p>
@@ -293,7 +294,11 @@
 						</h1>
 					</div>
 					<div class="modal-body">
-						You researched Democracy in {{turnsTaken}} turns!<br/>
+						<h3>
+							You researched Democracy in 
+							<span class="badge">{{turnsTaken}} <span class="glyphicon glyphicon-hourglass"></span></span>
+							turns!
+						</h3>
 
 						Did you do better than your friends?<br/>
 
