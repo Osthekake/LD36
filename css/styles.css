@@ -1,0 +1,27 @@
+#techTreeContainer {
+	overflow-x: scroll;
+}
+
+#techTreeContainer {
+	
+}
+
+#techTree {
+	width: 900px;
+	/*position: absolute;*/
+}
+
+#techTree button{
+	width:140px;
+}
+
+#techTree div.row div {
+	width:140px;
+}
+
+#techTree div.row {
+	width:1500px;
+}
+.lb-lg {
+  font-size: 20px;
+}

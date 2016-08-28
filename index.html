@@ -1,0 +1,332 @@
+<meta charset="utf-8">
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <title>Ludum Dare 36</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script type="text/javascript" src="lib/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="lib/handlebars-v4.0.5.js"></script>
+        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    </head>
+    <body>
+    	<nav class="navbar navbar-inverse" id="infobar"></nav>
+    	<div class="container" id="mainOutlet"></div>
+    	<div id="modalOutlet" class="modal fade" role="dialog"></div>
+
+	    <!-- Templates go here -->
+
+	    <script id="infoBarTemplate" type="text/x-handlebars-template">
+	      <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Tech Tree (the game)</a>
+		    </div>
+    	</script>
+
+	    <script id="mainMenu" type="text/x-handlebars-template">
+	    	<div class="jumbotron">
+			  <h1>Tech Tree (the game)</h1>
+
+			  <p><a class="btn btn-primary btn-lg"onclick="Game.start();">Play</a></p>
+			</div>
+	    </script>
+
+	    <script id="gameStructureTemplate" type="text/x-handlebars-template">
+	    	<div class="row">
+		    	<div class="col-md-8">
+		    		<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Technology</h3>
+					  </div>
+					  <div class="panel-body" id="techTreeContainer">
+					  	<div id="techTree">
+					    	[Tech tree]
+					   	</div>
+					  </div>
+					</div>
+	    		</div>
+	    		<div class="col-md-4" id="info">
+					[Info here]
+				</div>
+    		</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">People</h3>
+					  </div>
+					  <div class="panel-body" id="people">
+					    [People go here]
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" id="unborn">
+				 		[Unborn People go here]
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Production</h3>
+					  </div>
+					  <div class="panel-body" id="production">
+					    [Production goes here]
+					  </div>
+					</div>
+				</div>
+			</div>
+	    </script>
+
+ 		<script id="techTreeTemplate" type="text/x-handlebars-template">
+    		<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Aesthetics"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Art"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Ethics"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Law"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Logic"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Education"></div>
+    			<div class="col-md-1" id="Science"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Equality"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Mythology"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Education"></div>
+    			<div class="col-md-1" id="Science"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Storytelling"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Trade"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Machines"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1" id="Language"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Culture"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Roads"></div>
+    			<div class="col-md-1" id="Bridges"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Logistics"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Division_of_labour"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Cities"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Construction"></div>
+    			<div class="col-md-1" id="Ships"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1" id="Simple_Tools"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Agriculture"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Construction"></div>
+    			<div class="col-md-1" id="Ships"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Advanced_Tools"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Specialists"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="War"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Raiding"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Soldiers"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Nations"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Democracy"></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1"></div>
+    			<div class="col-md-1" id="Kings"></div>
+			</div>
+	    </script>
+
+	    <script id="techTemplate" type="text/x-handlebars-template">
+    		<button 
+	    		class="btn {{btnClass}}" 
+	    		onclick="Game.selectTech('{{techId}}');">
+				{{techName}}
+			</button>
+	    </script>
+
+	    <script id="smallTechTemplate" type="text/x-handlebars-template">
+    		<span class="label {{labelClass}}">
+				{{techName}}
+			</span>
+	    </script>
+
+	    <script id="infoTemplate" type="text/x-handlebars-template">
+	    	<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Information</h3>
+				</div>
+				<div class="panel-body" id="info">
+			    	{{#if selectedTech}}
+			    		<h1>{{selectedTech.techName}}</h1>
+			    		<p>{{selectedTech.techInfo}}<p>
+						<h3>Requirements</h3>
+			    		<ul>
+				    		{{#each selectedTech.required}}
+				    			<li id="small_{{this}}"></li>
+			    			{{else}}
+			    				<li><span class="label label-success">No further tech required</span></li>
+				    		{{/each}}
+			    		</ul>	
+			    		<h3>Effect</h3>
+			    		<ul>
+			    			<li>{{selectedTech.effects}}</li>
+		    			</ul>
+			    		<h3>Leads to</h3>
+			    		<ul>
+				    		{{#each selectedTech.to}}
+				    			<li id="small_{{this}}"></li>
+			    			{{else}}
+			    				<li><span class="label label-success">Victory</span></li>
+				    		{{/each}}
+			    		</ul>
+			    		<h3>Cost</h3>
+			    		<ul>
+			    			<li><span class="label label-primary">{{selectedTech.cost}} <span class="glyphicon glyphicon-education"></span></span></li>
+		    			</ul>
+		    		{{else}}
+		    			<h1>No Technology selected</h1>
+		    			<p>Please select a technology on the left</p>
+		    		{{/if}}
+				</div>
+				<div class="panel-footer">
+					{{#if nextTech}}
+			    		<button class="btn btn-success" onclick="Game.advanceTime();">
+			    			<span class="glyphicon glyphicon-forward"></span>
+			    			Complete research
+							<span class="badge">{{turnsToTech}} <span class="glyphicon glyphicon-hourglass"></span></span>
+						</button>
+					{{else}}
+						<button disabled class="btn btn-success">
+			    			Complete research
+						</button>
+					{{/if}}
+					<br/>
+					Turns taken <span class="badge">{{turnsTaken}} <span class="glyphicon glyphicon-hourglass"></span></span>
+				</div>
+			</div>	
+	    </script>
+
+	    <script id="modalTemplate" type="text/x-handlebars-template">
+	    	<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">
+							Modal title
+						</h1>
+					</div>
+					<div class="modal-body">
+						Modal body
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
+	    </script>
+
+	    <script id="peopleTemplate" type="text/x-handlebars-template">
+    		{{#each renderPeople}}
+    			<h2 style="display: inline-block;">
+    				<span class="person label label-{{color}} glyphicon glyphicon-user" title="{{tooltip}}">
+					</span>
+    			</h2>
+			{{/each}}
+	    </script>
+
+	    <script id="unbornTemplate" type="text/x-handlebars-template">
+	    	<div class="panel-heading">
+			    <h3 class="panel-title">
+			    	People will be born from this queue in <span class="badge">{{turnsToPerson}} <span class="glyphicon glyphicon-hourglass"></span></span>
+		    	</h3>
+		  	</div>
+		  	<div class="panel-body">
+		  		{{#if controlUnborn}}
+		  			{{#each renderUnborn}}
+		  				<h2 style="display: inline-block;">
+			    			<span class="person label label-{{color}} glyphicon glyphicon-user" title="{{tooltip}}" onclick='Game.prioritize("{{role}}");' cursor="pointer">
+							</span>
+						</h2>
+					{{/each}}
+				{{else}}
+				  	{{#each renderUnborn}}
+		    			<h2 style="display: inline-block;">
+		    				<span class="person label label-{{color}} glyphicon glyphicon-user" title="{{tooltip}}">
+							</span>
+		    			</h2>	
+					{{/each}}
+				{{/if}}
+			</div>
+	    </script>
+
+	    <script id="productionTemplate" type="text/x-handlebars-template">
+    		<div class="row">
+    			<span class="col-md-6 label label-success glyphicon glyphicon-grain lb-lg" title="Food will increase your population over time."> {{foodProduction}}</span>
+		    	<span class="col-md-6 label label-primary glyphicon glyphicon-education lb-lg" title="Science is used to complete Technologies faster."> {{scienceProduction}}</span>
+	    	</div>	
+	    	<div class="row">
+		    	<span class="col-md-6 label label-warning glyphicon glyphicon-piggy-bank lb-lg" title="Goods give a bonus to food and science."> {{gPer}}%</span>
+		    	<span class="col-md-6 label label-danger glyphicon glyphicon-fire lb-lg" title="Corruption lowers the production of food and science."> {{cPer}}%</span>
+	    	</div>
+	    </script>
+
+	    <!-- This has to go at the end! -->
+	    <script type="text/javascript" src="templates.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
